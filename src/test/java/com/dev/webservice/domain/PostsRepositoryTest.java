@@ -39,7 +39,7 @@ public class PostsRepositoryTest {
 		postsRepository.save(Posts.builder()
 				.title("테스트 게시글")
 				.content("테스트 본문")
-				.author("limited9@naver.com")
+				.author("test@test.com")
 				.build());
 		
 		// when - 테스트 하고자 하는 행위 선언
@@ -49,7 +49,7 @@ public class PostsRepositoryTest {
 		Posts posts = postsList.get(0);
 		assertThat(posts.getTitle(), is("테스트 게시글"));
 		assertThat(posts.getContent(), is("테스트 본문"));
-		assertThat(posts.getAuthor(), is("limited9@naver.com"));
+		assertThat(posts.getAuthor(), is("test@test.com"));
 	}
 	
 	@Test
