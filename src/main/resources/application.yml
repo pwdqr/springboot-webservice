@@ -1,4 +1,17 @@
 spring:
+  profiles:
+    active: local # 기본환경 선택 (어플리케이션 실행시 파라미터로 넘어온 것이 없으면 active 값을 본다.)
+
+# local 환경
+---
+spring:
+  profiles: local
+  datasource:
+    data: classpath:data-h2.sql # 시작할때 실행시킬 script (local profile에서는 data-h2.sql을 초기 데이터 실행 스크립트로 지정.)
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
   h2:
     console:
       enabled: true

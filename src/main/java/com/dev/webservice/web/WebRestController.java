@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dev.webservice.domain.posts.PostsRepository;
 import com.dev.webservice.dto.posts.PostsSaveRequestDto;
+import com.dev.webservice.service.PostsService;
 
 import lombok.AllArgsConstructor;
 
@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class WebRestController {
 	
-	private PostsRepository postsRepository; // lombok의 @AllArgsConstructor를 이용해 @Autowired가 아닌 생성자로 주입.
+	private PostsService postsService; // lombok의 @AllArgsConstructor를 이용해 @Autowired가 아닌 생성자로 주입.
 	
 	@GetMapping("/hello")
 	public String hello() {
@@ -22,7 +22,8 @@ public class WebRestController {
 	}
 	
 	@PostMapping("/posts")
-	public void savePosts(@RequestBody PostsSaveRequestDto dto) { // @RequestBody을 이용해 HTTP 요청을 자바 객체로 매핑.
-		postsRepository.save(dto.toEntity());
+	public Long savePosts(@RequestBody PostsSaveRequestDto dto) { // @RequestBody을 이용해 HTTP 요청을 자바 객체로 매핑.
+		return postsService.save(dto);
+		
 	}
 }
