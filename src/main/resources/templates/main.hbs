@@ -74,8 +74,31 @@
 	<!-- jquery, 부트스트랩 js 추가 -->
 	<script src="/js/lib/jquery.min.js"></script>
 	<script src="/js/lib/bootstrap.min.js"></script>
-	
 	<!-- custom js 추가 -->
 	<script src="/js/app/main.js"></script>
+	
+	<script type="application/javascript">
+	var markingErrorField = function (response) {
+		//console.log(response);
+	    const errorFields = response.responseJSON.errors;
+	
+	    if(!errorFields){
+	        alert(response.response.message);
+	        return;
+	    }
+	
+	    var $field, error;
+	    for(var i=0, length = errorFields.length; i<length;i++){
+	        error = errorFields[i];
+	        $field = $('#'+error['field']);
+	        
+	        if($field && $field.length > 0){
+	            $field.siblings('.error-message').remove();
+	            //$field.after('<span class="error-message text-muted taxt-small text-danger">'+error.defaultMessage+'</span>');
+	            $field.after('<span class="error-message" style="color:red;">'+error.defaultMessage+'</span>');
+	        }
+	    }
+	};
+	</script>
 </body>
 </html>

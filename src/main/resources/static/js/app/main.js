@@ -12,9 +12,9 @@ var main = {
 		
 		save : function(){
 			var data = {
-					title: $('#title').val(),
-					author: $('#author').val(),
-					content: $('#content').val()
+					title: $('#title').val().trim(),
+					author: $('#author').val().trim(),
+					content: $('#content').val().trim()
 			};
 			
 			$.ajax({
@@ -24,13 +24,14 @@ var main = {
 				contentType: 'application/json; charset=utf-8',
 				data: JSON.stringify(data)
 			}).done(function(result){
-//				console.log(result); // 등록된 entity id
+				console.log(result); // 등록된 entity id
 				alert('글이 등록되었습니다.');
 				location.reload();
 			}).fail(function(error){
-				alert(error);
+				markingErrorField(error);
 			});
 		}
+		
 };
 
 main.init();
